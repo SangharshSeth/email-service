@@ -5,6 +5,32 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
+// Hardcoded credentials for this simple service.
+const CREDENTIALS = { username: "admin", password: "admin" };
+
+app.post("/login", (req, res) => {
+  const { username, password } = req.body || {};
+
+  if (!username || !password) {
+    return res.status(400).json({
+      status: "error",
+      message: "Fields 'username' and 'password' are required.",
+    });
+  }
+
+  if (username !== CREDENTIALS.username || password !== CREDENTIALS.password) {
+    return res.status(401).json({ status: "error", message: "Invalid credentials." });
+  }
+
+  const token = `token-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+
+  return res.status(200).json({
+    status: "ok",
+    message: "Login successful.",
+    token,
+  });
+});
+
 // Single endpoint: pretend to send an email. Nothing is actually sent.
 app.post("/send", (req, res) => {
   const { to, subject, body } = req.body || {};
@@ -16,14 +42,14 @@ app.post("/send", (req, res) => {
     });
   }
 
-  const id = `mock-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  const id = `email-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
-  console.log(`[mock-email] would send email ${id} to ${to}: ${subject}`);
+  console.log(`[email] would send email ${id} to ${to}: ${subject}`);
 
   return res.status(200).json({
     status: "sent",
     id,
-    message: `Mock email to ${to} accepted (not actually sent).`,
+    message: `Email to ${to} accepted (not actually sent).`,
     email: { to, subject, body: body || "" },
     timestamp: new Date().toISOString(),
   });
@@ -32,7 +58,7 @@ app.post("/send", (req, res) => {
 app.get("/health", (_req, res) => res.json({ status: "ok" }));
 
 app.listen(PORT, () => {
-  console.log(`Mock email service listening on http://localhost:${PORT}`);
+  console.log(`Email service listening on http://localhost:${PORT}`);
 });
 
 module.exports = app;

@@ -1,7 +1,7 @@
 {
-  "name": "mock-email-service",
+  "name": "email-service",
   "version": "1.0.0",
-  "description": "Mock email service with a single send endpoint (no real emails sent).",
+  "description": "Email service with login and send endpoints (no real emails sent).",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
