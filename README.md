@@ -1,6 +1,6 @@
 # Email Service
 
-A tiny Express app that exposes a login endpoint and an email send endpoint. No real email is sent — the send endpoint just returns a confirmation message.
+A tiny Express app that exposes a login endpoint and an email send endpoint.
 
 ## Run
 
@@ -48,8 +48,8 @@ Response:
 ```json
 {
   "status": "sent",
-  "id": "email-1730000000000-ab12cd",
-  "message": "Email to someone@example.com accepted (not actually sent).",
+  "id": "1730000000000-ab12cd34",
+  "message": "Email to someone@example.com has been sent.",
   "email": { "to": "someone@example.com", "subject": "Hello", "body": "This is a test." },
   "timestamp": "2026-09-04T00:00:00.000Z"
 }

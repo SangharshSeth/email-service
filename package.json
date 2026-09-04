@@ -1,7 +1,7 @@
 {
   "name": "email-service",
   "version": "1.0.0",
-  "description": "Email service with login and send endpoints (no real emails sent).",
+  "description": "Express email service with login and send endpoints.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

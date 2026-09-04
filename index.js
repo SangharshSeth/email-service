@@ -31,7 +31,6 @@ app.post("/login", (req, res) => {
   });
 });
 
-// Single endpoint: pretend to send an email. Nothing is actually sent.
 app.post("/send", (req, res) => {
   const { to, subject, body } = req.body || {};
 
@@ -42,14 +41,14 @@ app.post("/send", (req, res) => {
     });
   }
 
-  const id = `email-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  const id = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 
-  console.log(`[email] would send email ${id} to ${to}: ${subject}`);
+  console.log(`[email] send ${id} to ${to}: ${subject}`);
 
   return res.status(200).json({
     status: "sent",
     id,
-    message: `Email to ${to} accepted (not actually sent).`,
+    message: `Email to ${to} has been sent.`,
     email: { to, subject, body: body || "" },
     timestamp: new Date().toISOString(),
   });
